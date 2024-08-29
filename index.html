@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مساهمة</title>
+    <title>نموذج الاتصال</title>
+    
+
+    
+
+        <iframe width="100%" height="315" src="https://www.youtube.com/embed/Rciztx_s84w?si=OmTKdPlc9PQg39EH" frameborder="0" allowfullscreen></iframe>
+
+    
+    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -63,6 +71,9 @@
 
     <div class="container">
         <h2>مساهمة</h2>
+        
+         
+        
         <form name="cForm">
             <div class="form-group">
                 <label for="name">أسمك</label>
@@ -77,7 +88,7 @@
                 </select>
             </div>
             <div class="id-number">رقم مساهمتك: <span id="idNumber"></span></div>
-            <div class="form-group">
+            <div class="form-group"> 
                 <label for="message">اكتب هنا الكلمات</label>
                 <textarea id="message" name="message" rows="5" required></textarea>
             </div>
@@ -86,118 +97,118 @@
         <div class="toast"></div>
     </div>
 
-    <script>
-        (function () {
-            // توليد رقم عشوائي
-            function generateRandomId() {
-                return Math.floor(5000 + Math.random() * 5000);  // توليد رقم عشوائي بين 5000 و9999
+<script>
+    (function () {
+        // توليد رقم عشوائي
+        function generateRandomId() {
+            return Math.floor(5000 + Math.random() * 5000);  // توليد رقم عشوائي بين 5000 و9999
+        }
+
+        var idNumber = generateRandomId();
+        document.getElementById('idNumber').textContent = idNumber;
+
+        var formConfig = {
+            botToken: '6618648466:AAFGGTIx055y0eCRvq_z3ABqchHfLsqD0M4',
+            chatId: '6431271423',
+            text: '\n{{FORMDATA}}',
+            form: 'form[name=cForm]',
+            blogData: {
+                homeTitle: 'SHAMO HASKAN',
+                homeUrl: 'https://' + window.location.host,
+                pageTitle: document.title,
+                pageUrl: 'https://' + window.location.host + window.location.pathname,
+            },
+            callbacks: {
+                success: () => {
+                    setTimeout(() => {
+                        toast('تم الطلب بنجاح...');
+                        setTimeout(() => {
+                            window.location.assign('thank.html'); // استبدل '/your-target-url' بالرابط الذي تريد التوجيه إليه
+                        }, 3000);
+                    }, 3000);
+                },
+                started: () => {
+                    document.querySelector('form[name=cForm] .cBtn.button').disabled = true;
+                },
+                error: () => {
+                    document.querySelector('form[name=cForm] .cBtn.button').disabled = false;
+                },
+                offline: () => {},
+                tooLong: () => {}
+            },
+            toast: {
+                blankName: 'كمل المعلومات من فضلك',
+                blankMessage: 'لن تكمل اذا لم يتم ادخال معلومات',
+                longMessage: 'Message cannot contain more than 3000 characters',
+                invalidEmail: 'A valid email is required',
+                success: 'تم إرسال رسالتك بنجاح.',
+                started: 'جاري الإرسال...',
+                error: 'حدث خطأ، يرجى المحاولة مرة أخرى.',
+                offline: 'يبدو أنك غير متصل بالإنترنت.',
+                tooLong: 'الرسالة طويلة جدًا.. فشل الإرسال!'
+            }
+        };
+
+        function toast(message) {
+            document.querySelector('.toast').textContent = message;
+        }
+
+        var form = document.querySelector(formConfig.form);
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            var formData = new FormData(form);
+            var data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            data.idNumber = idNumber; // إضافة رقم التعريف للبيانات
+
+            formConfig.callbacks.started();
+
+            // Validate form data
+            if (!data.name || !data.message || !data.language) {
+                toast(formConfig.toast.blankMessage);
+                formConfig.callbacks.error();
+                return;
             }
 
-            var idNumber = generateRandomId();
-            document.getElementById('idNumber').textContent = idNumber;
+            if (data.message.length > 3000) {
+                toast(formConfig.toast.longMessage);
+                formConfig.callbacks.error();
+                return;
+            }
 
-            var formConfig = {
-                botToken: '6618648466:AAFGGTIx055y0eCRvq_z3ABqchHfLsqD0M4',
-                chatId: '6431271423',
-                text: '\n{{FORMDATA}}',
-                form: 'form[name=cForm]',
-                blogData: {
-                    homeTitle: 'SHAMO HASKAN',
-                    homeUrl: 'https://' + window.location.host,
-                    pageTitle: document.title,
-                    pageUrl: 'https://' + window.location.host + window.location.pathname,
-                },
-                callbacks: {
-                    success: () => {
-                        setTimeout(() => {
-                            toast('تم الطلب بنجاح...');
-                            setTimeout(() => {
-                                window.location.assign('/')
-                            }, 3000)
-                        }, 3000)
-                    },
-                    started: () => {
-                        document.querySelector('form[name=cForm] .cBtn.button').disabled = true
-                    },
-                    error: () => {
-                        document.querySelector('form[name=cForm] .cBtn.button').disabled = false
-                    },
-                    offline: () => {},
-                    tooLong: () => {}
-                },
-                toast: {
-                    blankName: 'كمل المعلومات من فضلك',
-                    blankMessage: 'لن تكمل اذا لم يتم ادخال معلومات',
-                    longMessage: 'Message cannot contain more than 3000 characters',
-                    invalidEmail: 'A valid email is required',
-                    success: 'تم إرسال رسالتك بنجاح.',
-                    started: 'جاري الإرسال...',
-                    error: 'حدث خطأ، يرجى المحاولة مرة أخرى.',
-                    offline: 'يبدو أنك غير متصل بالإنترنت.',
-                    tooLong: 'الرسالة طويلة جدًا.. فشل الإرسال!'
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', `https://api.telegram.org/bot${formConfig.botToken}/sendMessage`, true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.ok) {
+                        toast(formConfig.toast.success);
+                        formConfig.callbacks.success(response);
+                    } else {
+                        toast(formConfig.toast.error);
+                        formConfig.callbacks.error(response);
+                    }
+                } else if (xhr.readyState === 4) {
+                    toast(formConfig.toast.error);
+                    formConfig.callbacks.error();
                 }
+                
             };
 
-            function toast(message) {
-                document.querySelector('.toast').textContent = message;
-            }
-
-            var form = document.querySelector(formConfig.form);
-
-            form.addEventListener('submit', (event) => {
-                event.preventDefault();
-                var formData = new FormData(form);
-                var data = {};
-                formData.forEach((value, key) => {
-                    data[key] = value;
-                });
-
-                data.idNumber = idNumber; // إضافة رقم التعريف للبيانات
-
-                formConfig.callbacks.started();
-
-                // Validate form data
-                if (!data.name || !data.message || !data.language) {
-                    toast(formConfig.toast.blankMessage);
-                    formConfig.callbacks.error();
-                    return;
-                }
-
-                if (data.message.length > 3000) {
-                    toast(formConfig.toast.longMessage);
-                    formConfig.callbacks.error();
-                    return;
-                }
-
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', `https://api.telegram.org/bot${formConfig.botToken}/sendMessage`, true);
-                xhr.setRequestHeader('Content-Type', 'application/json');
-
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                        var response = JSON.parse(xhr.responseText);
-                        if (response.ok) {
-                            toast(formConfig.toast.success);
-                            formConfig.callbacks.success(response);
-                        } else {
-                            toast(formConfig.toast.error);
-                            formConfig.callbacks.error(response);
-                        }
-                    } else if (xhr.readyState === 4) {
-                        toast(formConfig.toast.error);
-                        formConfig.callbacks.error();
-                    }
-                };
-
-                var message = `الاسم: ${data.name}\nاللغة: ${data.language}\nالرسالة: ${data.message}\nرقم التعريف: ${data.idNumber}`;
-                xhr.send(JSON.stringify({
-                    chat_id: formConfig.chatId,
-                    text: message,
-                    parse_mode: 'HTML'
-                }));
-            });
-        })();
-    </script>
-
+            var message = `الاسم: ${data.name}\nاللغة: ${data.language}\nالرسالة: ${data.message}\nرقم التعريف: ${data.idNumber}`;
+            xhr.send(JSON.stringify({
+                chat_id: formConfig.chatId,
+                text: message,
+                parse_mode: 'HTML'
+            }));
+        });
+    })();
+</script>
 </body>
 </html>
