@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحة شكر</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            position: relative;
+        }
+        .message {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style-type: none; /* إزالة النقاط */
+            padding: 0;
+        }
+        li {
+            margin: 10px 0; /* لتباعد النصوص */
+        }
+        .gif {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <ul>
+            <li class="message">شكرا على تقديم كلمات</li>
+            <li>سيتم إضافته قريبا على ترجمة</li>
+        </ul>
+        <img src="your-image.gif" alt="GIF" class="gif" id="gifImage">
+    </div>
+
+    <script>
+        window.onload = function() {
+            const gifImage = document.getElementById('gifImage');
+            gifImage.style.display = 'block';
+            
+            // إخفاء صورة الـ GIF بعد 3 ثوانٍ
+            setTimeout(() => {
+                gifImage.style.display = 'none';
+            }, 3000); // 3 ثوانٍ
+            
+            // إعادة التوجيه بعد 6 ثوانٍ
+            setTimeout(() => {
+                window.location.href = 'https://shamo74.github.io/new-registration/'; // استبدل هذا بالرابط الذي تريد التوجيه إليه
+            }, 6000); // 6 ثوانٍ
+        };
+    </script>
+</body>
+</html>
