@@ -3,14 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نموذج الاتصال</title>
+    <title>Yezidi translation</title>
     
 
     
 
-        <!-- iframe width="100%" height="315" src="https://www.youtube.com/embed/Rciztx_s84w?si=OmTKdPlc9PQg39EH" frameborder="0" allowfullscreen--!></iframe>
+        <iframe width="100%" height="315" src="https://www.youtube.com/embed/Rciztx_s84w?si=OmTKdPlc9PQg39EH" frameborder="0" allowfullscreen></iframe>
 
-    
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Selection</title>
+</head>
+<body>
+ 
+    <form action="" method="get">
+        <select name="language" onchange="location = this.value;">
+            <option value="en.html">English</option>
+            <option value="ar.html">العربية</option>
+            <option value="ku-s.html">کوردی</option>
+            <option value="zsh.html">ايزيدي ( شنكال )</option>
+            
+            <option value="de.html">Deutsch</option>
+            <option value="nl.html">Nederlands</option>
+       
+            <option value="hy.html">Հայերեն</option>
+        </select>
+    </form>
+</body>
+</html>
     
     <style>
         body {
@@ -70,34 +93,36 @@
 <body>
 
     <div class="container">
-        <h2>مساهمة</h2>
+        <h2>Translation Contribution </h2>
         
          
         
         <form name="cForm">
             <div class="form-group">
-                <label for="name">أسمك</label>
+                <label for="name">your name</label>
                 <input type="text" id="name" name="name" required>
             </div>
             <div class="form-group">
-                <label for="language">اختر اللهجات الإيزيدية</label>
+                <label for="language">
+Choose Yazidi dialects
+</label>
                 <select id="language" name="language" required>
                     <option value="𐺏𐺡𐺀𐺢𐺩 𐺀𐺩𐺏𐺨𐺋𐺨">𐺏𐺡𐺀𐺢𐺩 𐺀𐺩𐺏𐺨𐺋𐺨</option>
-                    <option value="اللغة الايزيدية - شنگالي">خوارگي</option>
-                    <option value="اللغة الايزيدية - جوانبي">جوانبي</option>
+                    <option value="Khwarki">Khwarki</option>
+                    <option value="Juanbi">Juanbi</option>
                 </select>
             </div>
-            <div class="id-number">رقم مساهمتك: <span id="idNumber"></span></div>
+            <div class="id-number">Your contribution number: <span id="idNumber"></span></div>
             <div class="form-group"> 
-                <label for="message">اكتب هنا الكلمات</label>
+                <label for="message">Write the words here</label>
                 <textarea id="message" name="message" rows="5" required></textarea>
             </div>
-            <button type="submit" class="cBtn button">إضافة</button>
+            <button type="submit" class="cBtn button">addition</button>
         </form>
         <div class="toast"></div>
     </div>
 
-<script>
+<script/>
     (function () {
         // توليد رقم عشوائي
         function generateRandomId() {
@@ -121,7 +146,7 @@
             callbacks: {
                 success: () => {
                     setTimeout(() => {
-                        toast('تم تقديم كلمات');
+                        toast('Words submitted');
                         setTimeout(() => {
                             window.location.assign('thank.html'); // استبدل '/your-target-url' بالرابط الذي تريد التوجيه إليه
                         }, 3000);
@@ -137,16 +162,16 @@
                 tooLong: () => {}
             },
             toast: {
-                blankName: 'كمل المعلومات من فضلك',
-                blankMessage: 'لن تكمل اذا لم يتم ادخال معلومات',
-                longMessage: 'Message cannot contain more than 3000 characters',
-                invalidEmail: 'A valid email is required',
-                success: 'تم إرسال كلمات الى ترجمة.',
-                started: 'جاري الإرسال...',
-                error: 'حدث خطأ، يرجى المحاولة مرة أخرى.',
-                offline: 'يبدو أنك غير متصل بالإنترنت.',
-                tooLong: 'الرسالة طويلة جدًا.. فشل الإرسال!'
-            }
+blankName: 'Please complete the information',
+blankMessage: 'You will not complete if no information is entered',
+longMessage: 'Message cannot contain more than 3000 characters',
+invalidEmail: 'A valid email is required',
+success: 'Words sent to translation.',
+started: 'Sending...',
+error: 'An error occurred, please try again.',
+offline: 'It appears that you are offline.',
+toLong: 'Message is too long. Sending failed!'
+}
         };
 
         function toast(message) {
