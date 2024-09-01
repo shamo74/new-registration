@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yezidi translation</title>
+    
+
+    
+
+        <iframe width="100%" height="315" src="https://www.youtube.com/embed/Rciztx_s84w?si=OmTKdPlc9PQg39EH" frameborder="0" allowfullscreen></iframe>
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Selection</title>
+</head>
+<body>
+ 
+    <form action="" method="get">
+        <select name="language" onchange="location = this.value;">
+        	   <option value="ar.html">العربية</option>
+            <option value="en.html">English</option>
+           
+            <option value="ku-s.html">کوردی</option>
+            <option value="zsh.html">ايزيدي ( شنكال )</option>
+            
+            <option value="de.html">Deutsch</option>
+            <option value="nl.html">Nederlands</option>
+       
+            <option value="hy.html">Հայերեն</option>
+        </select>
+    </form>
+</body>
+</html>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            direction: rtl;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: right;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, textarea, select, .cBtn.button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .cBtn.button {
+            background-color: #5cb85c;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .cBtn.button:hover {
+            background-color: #4cae4c;
+        }
+        .toast {
+            margin-top: 15px;
+            color: #d9534f;
+        }
+        .id-number {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>مساهمة الترجمة </h2>
+        
+         
+        
+        <form name="cForm">
+            <div class="form-group">
+                <label for="name">اسمك</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="language">
+اختر اللهجات الإيزيدية
+</label>
+                <select id="language" name="language" required>
+                    <option value="𐺏𐺡𐺀𐺢𐺩 𐺀𐺩𐺏𐺨𐺋𐺨">𐺏𐺡𐺀𐺢𐺩 𐺀𐺩𐺏𐺨𐺋𐺨</option>
+                    <option value="Khwarki">خوركي</option>
+                    <option value="Juanbi">جوانبي</option>
+                </select>
+            </div>
+            <div class="id-number">رقم مساهمتك: <span id="idNumber"></span></div>
+            <div class="form-group"> 
+                <label for="message">اكتب الكلمات هنا</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="cBtn button">إضافة</button>
+        </form>
+        <div class="toast"></div>
+    </div>
+
+<script/>
+    (function () {
+        // توليد رقم عشوائي
+        function generateRandomId() {
+            return Math.floor(5000 + Math.random() * 5000);  // توليد رقم عشوائي بين 5000 و9999
+        }
+
+        var idNumber = generateRandomId();
+        document.getElementById('idNumber').textContent = idNumber;
+
+        var formConfig = {
+            botToken: '6618648466:AAFGGTIx055y0eCRvq_z3ABqchHfLsqD0M4',
+            chatId: '6431271423',
+            text: '\n{{FORMDATA}}',
+            form: 'form[name=cForm]',
+            blogData: {
+                homeTitle: 'SHAMO HASKAN',
+                homeUrl: 'https://' + window.location.host,
+                pageTitle: document.title,
+                pageUrl: 'https://' + window.location.host + window.location.pathname,
+            },
+            callbacks: {
+                success: () => {
+                    setTimeout(() => {
+                        toast('Words submitted');
+                        setTimeout(() => {
+                            window.location.assign('thank.html'); // استبدل '/your-target-url' بالرابط الذي تريد التوجيه إليه
+                        }, 3000);
+                    }, 3000);
+                },
+                started: () => {
+                    document.querySelector('form[name=cForm] .cBtn.button').disabled = true;
+                },
+                error: () => {
+                    document.querySelector('form[name=cForm] .cBtn.button').disabled = false;
+                },
+                offline: () => {},
+                tooLong: () => {}
+            },
+            toast: {
+blankName: 'Please complete the information',
+blankMessage: 'You will not complete if no information is entered',
+longMessage: 'Message cannot contain more than 3000 characters',
+invalidEmail: 'A valid email is required',
+success: 'Words sent to translation.',
+started: 'Sending...',
+error: 'An error occurred, please try again.',
+offline: 'It appears that you are offline.',
+toLong: 'Message is too long. Sending failed!'
+}
+        };
+
+        function toast(message) {
+            document.querySelector('.toast').textContent = message;
+        }
+
+        var form = document.querySelector(formConfig.form);
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            var formData = new FormData(form);
+            var data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            data.idNumber = idNumber; // إضافة رقم التعريف للبيانات
+
+            formConfig.callbacks.started();
+
+            // Validate form data
+            if (!data.name || !data.message || !data.language) {
+                toast(formConfig.toast.blankMessage);
+                formConfig.callbacks.error();
+                return;
+            }
+
+            if (data.message.length > 3000) {
+                toast(formConfig.toast.longMessage);
+                formConfig.callbacks.error();
+                return;
+            }
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', `https://api.telegram.org/bot${formConfig.botToken}/sendMessage`, true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.ok) {
+                        toast(formConfig.toast.success);
+                        formConfig.callbacks.success(response);
+                    } else {
+                        toast(formConfig.toast.error);
+                        formConfig.callbacks.error(response);
+                    }
+                } else if (xhr.readyState === 4) {
+                    toast(formConfig.toast.error);
+                    formConfig.callbacks.error();
+                }
+                
+            };
+
+            var message = `الاسم: ${data.name}\nاللغة: ${data.language}\nالرسالة: ${data.message}\nرقم التعريف: ${data.idNumber}`;
+            xhr.send(JSON.stringify({
+                chat_id: formConfig.chatId,
+                text: message,
+                parse_mode: 'HTML'
+            }));
+        });
+    })();
+</script>
+</body>
+</html>
